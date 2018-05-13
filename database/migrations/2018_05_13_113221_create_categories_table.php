@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DimacaDefault extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,15 @@ class DimacaDefault extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
+            $table->increments('id');
+            $table->string('name', 32);
+            $table->timestamps();
+
+            $table->unique('name');
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class DimacaDefault extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('categories');
     }
 }
